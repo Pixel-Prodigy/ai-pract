@@ -9,7 +9,7 @@ export function Search() {
     opacity: 0,
     transform: "translateY(60%)",
   });
-  const API_KEY = import.meta.env.VITE_API_KEY_HUGGINGFACE; // Hugging Face API Key
+  const API_KEY = import.meta.env.VITE_API_KEY_AI;
 
   useEffect(() => {
     setStyle({ opacity: 1, transform: "translateY(0)" });
