@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AppearText } from "../ui/AppearText";
 import { FaClipboard } from "react-icons/fa";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export function Search() {
   const [input, setInput] = useState("");
@@ -20,26 +19,29 @@ export function Search() {
 
   const handleSend = () => {
     if (!input) {
-      return; // Prevent sending empty input
+      return;
     }
 
     setMessages([...messages, { role: "user", text: input }]);
     setLoading(true);
 
-    // Call Hugging Face API with .then() method
-    fetch("https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-2.7B", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        inputs: input, // Send the user input to the model
-      }),
-    })
-      .then((response) => response.json()) // Convert the response to JSON
+    fetch(
+      "https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-2.7B",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          inputs: input,
+        }),
+      }
+    )
+      .then((response) => response.json())
       .then((data) => {
-        const aiMessage = data[0]?.generated_text || "Sorry, something went wrong.";
+        const aiMessage =
+          data[0]?.generated_text || "Sorry, something went wrong.";
 
         setMessages([
           ...messages,
