@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { AppearText } from "../ui/AppearText";
-import { FaClipboard } from "react-icons/fa";
 
 export function Main() {
   const [input, setInput] = useState("");
@@ -10,7 +9,6 @@ export function Main() {
     opacity: 0,
     transform: "translateY(60%)",
   });
-  const [copied, setCopied] = useState(false);
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
