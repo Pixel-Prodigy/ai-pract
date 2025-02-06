@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { AppearText } from "../ui/AppearText";
-import { FaClipboard } from "react-icons/fa";
 
 export function Translate() {
   const [input, setInput] = useState("");
@@ -10,7 +9,6 @@ export function Translate() {
     opacity: 0,
     transform: "translateY(60%)",
   });
-  const [copied, setCopied] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("hi");
   const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -74,7 +72,7 @@ export function Translate() {
         <select
           value={selectedLanguage}
           onChange={(e) => setSelectedLanguage(e.target.value)}
-          className="bg-gray-300/80 ml-5 text-white p-2  rounded-md"
+          className="bg-gray-300/80 ml-5 text-white p-2 rounded-md"
         >
           <option value="en">French to English</option>
           <option value="es">English to Spanish</option>
@@ -94,7 +92,6 @@ export function Translate() {
           <div className="bg-gray-300/80 p-4 rounded-md w-full text-white">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-orange-500 text-xl">Translated Text:</h3>
-            
             </div>
             <p>{response}</p>
           </div>

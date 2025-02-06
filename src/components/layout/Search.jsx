@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { AppearText } from "../ui/AppearText";
-import { FaClipboard } from "react-icons/fa";
 
 export function Search() {
   const [input, setInput] = useState("");
@@ -10,7 +9,6 @@ export function Search() {
     opacity: 0,
     transform: "translateY(60%)",
   });
-  const [copied, setCopied] = useState(false);
   const API_KEY = import.meta.env.VITE_API_KEY_HUGGINGFACE; // Hugging Face API Key
 
   useEffect(() => {
