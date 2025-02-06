@@ -1,21 +1,28 @@
 import { useState } from "react";
-
-import "./App.css";
 import { NavBar } from "./components/ui/NavBar";
 import { Start } from "./components/layout/Start";
-import {Switch , Route} from 'wouter'
+import { Route } from "wouter";
 import { Main } from "./components/layout/Main";
+import { Translate } from "./components/layout/Translate";
+import { Search } from "./components/layout/Search";  
+
+import { ContextProvider } from "./components/ui/ContextProvider";
+import { OpenAuth } from "./components/ui/OpenAuth";
+
 function App() {
   return (
-    <div className="bg-black h-screen">
-      <div className="mx-auto max-w-screen-lg flex py-8 flex-col">
-        <NavBar />
-        <Switch>
-          <Route path="/main" component={Main}/>
-          <Route path="/" component={Start}/>
-        </Switch>
+    <ContextProvider>
+      <div className="bg-black h-screen">
+        <div className="mx-auto max-w-screen-lg flex py-8 flex-col">
+          <OpenAuth />
+          <NavBar />
+          <Route path="/" component={Start} />
+          <Route path="/main" component={Main} />
+           <Route path="/translate" component={Translate} />
+           <Route path="/search" component={Search} />
+        </div>
       </div>
-    </div>
+    </ContextProvider>
   );
 }
 
