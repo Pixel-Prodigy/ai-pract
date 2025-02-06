@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AppearText } from "../ui/AppearText";
 import { FaClipboard } from "react-icons/fa";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export function Main() {
   const [input, setInput] = useState("");
@@ -18,35 +17,35 @@ export function Main() {
     setStyle({ opacity: 1, transform: "translateY(0)" });
   }, []);
 
- const handleSend = () => {
-  if (!input.trim()) {
-    setResponse("Please enter text to summarize...");
-    return;
-  }
-
-  setLoading(true);
-
-  fetch(
-    "https://api-inference.huggingface.co/models/sshleifer/distilbart-cnn-6-6",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ inputs: input }),
+  const handleSend = () => {
+    if (!input.trim()) {
+      setResponse("Please enter text to summarize...");
+      return;
     }
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      setResponse(data[0]?.summary_text || "System busy try again later");
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.error("An error:", error);
-      setResponse("An error occurred while fetching the response.");
-    });
-};
+
+    setLoading(true);
+
+    fetch(
+      "https://api-inference.huggingface.co/models/sshleifer/distilbart-cnn-6-6",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ inputs: input }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setResponse(data[0]?.summary_text || "System busy try again later");
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("An error:", error);
+        setResponse("An error occurred while fetching the response.");
+      });
+  };
   return (
     <div className="flex flex-col gap-8 items-center justify-center h-fit">
       <AppearText className="text-white text-8xl text-center">
@@ -77,12 +76,6 @@ export function Main() {
           <div className="bg-gray-300/80 p-4 rounded-md w-full text-white">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-orange-500 text-xl">Summary:</h3>
-              <CopyToClipboard text={response}>
-                <button className="flex items-center text-white mt-4 underline cursor-pointer hover:text-orange-500">
-                  <FaClipboard className="mr-2" />
-                  Copy to Clipboard
-                </button>
-              </CopyToClipboard>
             </div>
             <p>{response}</p>
           </div>

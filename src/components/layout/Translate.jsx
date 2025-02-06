@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AppearText } from "../ui/AppearText";
 import { FaClipboard } from "react-icons/fa";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export function Translate() {
   const [input, setInput] = useState("");
@@ -95,12 +94,7 @@ export function Translate() {
           <div className="bg-gray-300/80 p-4 rounded-md w-full text-white">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-orange-500 text-xl">Translated Text:</h3>
-              <CopyToClipboard text={response}>
-                <button className="flex items-center text-white mt-4 underline cursor-pointer hover:text-orange-500">
-                  <FaClipboard className="mr-2" />
-                  Copy to Clipboard
-                </button>
-              </CopyToClipboard>
+            
             </div>
             <p>{response}</p>
           </div>
